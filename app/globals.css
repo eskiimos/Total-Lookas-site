@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-golos: 'Golos Text', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #f8f8f8;
+  background: #303030;
+  font-family: var(--font-golos);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
