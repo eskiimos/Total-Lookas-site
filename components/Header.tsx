@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -14,6 +15,16 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const handleNavClick = (item: { id: string; href?: string }) => {
+    if (item.href) {
+      window.location.href = item.href
+    } else {
+      const element = document.getElementById(item.id)
+      element?.scrollIntoView({ behavior: 'smooth' })
+    }
+    setMobileMenuOpen(false)
+  }
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     element?.scrollIntoView({ behavior: 'smooth' })
@@ -22,6 +33,7 @@ export const Header: React.FC = () => {
 
   const navItems = [
     { label: 'Услуги', id: 'services' },
+    { label: 'Каталог', id: 'catalog', href: '/catalog' },
     { label: 'Бланки', id: 'blanks' },
     { label: 'Кейсы', id: 'cases' },
     { label: 'FAQ', id: 'faq' },
@@ -54,7 +66,7 @@ export const Header: React.FC = () => {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavClick(item)}
                 className="px-4 py-2 rounded-brand text-sm bg-[#3a3a3a] hover:bg-accent hover:text-white 
                   text-foreground/80 transition-all duration-200"
               >
@@ -67,7 +79,7 @@ export const Header: React.FC = () => {
           <button
             onClick={() => scrollToSection('cta')}
             className={`hidden md:block px-4 md:px-6 py-2 md:py-3 rounded-brand font-medium text-sm md:text-base
-              bg-accent text-white hover:bg-[#ea580c] transition-all duration-200
+              bg-accent text-white hover:bg-accent/90 transition-all duration-200
               ${isScrolled ? 'shadow-lg shadow-accent/20' : ''}`}
           >
             Оставить заявку
@@ -94,7 +106,7 @@ export const Header: React.FC = () => {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavClick(item)}
                 className="px-4 py-3 rounded-brand text-sm bg-[#3a3a3a] hover:bg-accent hover:text-white 
                   text-foreground/80 transition-all duration-200 text-center"
               >
@@ -104,7 +116,7 @@ export const Header: React.FC = () => {
             <button
               onClick={() => scrollToSection('cta')}
               className="col-span-2 px-4 py-3 rounded-brand font-medium text-sm
-                bg-accent text-white hover:bg-[#ea580c] transition-all duration-200"
+                bg-accent text-white hover:bg-accent/90 transition-all duration-200"
             >
               Оставить заявку
             </button>

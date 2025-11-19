@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Основное
+  name        String
+  price       String
+  sku         String   @unique
+  category    String
+  description String
+  status      String   @default("available") // available, pre-order, out-of-stock
+  
+  // Характеристики
+  minOrder    Int      @default(30)
+  leadTime    String   @default("7+ дней")
+  sizes       String   // JSON массив: ["S", "M", "L", "XL", "XXL"]
+  colors      String   // JSON массив: ["Черный", "Белый"]
+  fabric      String   @default("")
+  density     String   @default("")
+  
+  // SEO
+  metaTitle       String
+  metaDescription String
+  slug            String   @unique
+  
+  // Дополнительно
+  isFeatured      Boolean  @default(false)
+  sortOrder       Int      @default(0)
+  relatedProducts String   @default("[]") // JSON массив ID товаров
+  
+  // Связи
+  images     ProductImage[]
+  sizeChart  SizeChart?
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  url       String
+  isPrimary Boolean  @default(false)
+  order     Int      @default(0)
+  
+  createdAt DateTime @default(now())
+}
+
+model SizeChart {
+  id        String   @id @default(cuid())
+  productId String   @unique
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  imageUrl  String
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Media {
+  id          String   @id @default(cuid())
+  url         String   @unique
+  filename    String
+  size        Int      // размер в байтах
+  mimeType    String   // image/jpeg, image/png, etc
+  width       Int?     // ширина изображения
+  height      Int?     // высота изображения
+  usedInProducts Boolean @default(false) // используется ли в товарах
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

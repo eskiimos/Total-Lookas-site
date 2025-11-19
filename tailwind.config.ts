@@ -11,7 +11,7 @@ const config: Config = {
       colors: {
         background: '#303030',
         foreground: '#f8f8f8',
-        accent: '#F97316',
+        accent: '#6565FF',
       },
       borderRadius: {
         'brand': '15px',
