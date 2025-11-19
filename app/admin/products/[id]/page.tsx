@@ -671,7 +671,7 @@ export default function ProductEditPage() {
             ) : mediaFiles.length === 0 ? (
               <div className="text-center py-20 text-foreground/60">
                 <p className="text-xl mb-4">Медиатека пуста</p>
-                <p>Загрузите файлы через кнопку "Загрузить новое" или посетите раздел Медиатека</p>
+                <p>Загрузите файлы через кнопку &quot;Загрузить новое&quot; или посетите раздел Медиатека</p>
               </div>
             ) : (
               <div className="grid grid-cols-3 md:grid-cols-5 gap-4">
