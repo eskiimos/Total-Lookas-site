@@ -10,7 +10,7 @@ export async function GET() {
         }
       },
       orderBy: { sortOrder: 'asc' },
-      take: 6 // Берем только 6 товаров для главной
+      take: 4 // Берем только 4 товара для главной
     })
     
     return NextResponse.json({ products })

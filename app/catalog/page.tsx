@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
+import { CTASection } from '@/components/sections/CTA'
+import { Footer } from '@/components/sections/Footer'
 
 interface Product {
   id: string
@@ -14,6 +16,7 @@ interface Product {
   description: string
   minOrder: number
   leadTime: string
+  slug: string
   images: { url: string; isPrimary: boolean }[]
 }
 
@@ -82,7 +85,8 @@ export default function CatalogPage() {
                 const primaryImage = product.images.find(img => img.isPrimary)?.url || product.images[0]?.url
                 
                 return (
-                  <Card key={product.id} hover className="overflow-hidden !p-0">
+                  <Link key={product.id} href={`/products/${product.slug}`}>
+                    <Card hover className="overflow-hidden !p-0">
                     {/* Image */}
                     <div className="relative w-full aspect-[3/4] bg-[#404040] overflow-hidden">
                       {primaryImage ? (
@@ -101,10 +105,10 @@ export default function CatalogPage() {
                     
                     {/* Content */}
                     <div className="!p-[10px]">
-                      <h3 className="text-sm md:text-xl font-semibold mb-1 md:mb-2">
+                      <h3 className="font-unbounded text-sm md:text-xl font-semibold mb-1 md:mb-2">
                         {product.name}
                       </h3>
-                      <div className="text-accent font-bold text-base md:text-2xl mb-2 md:mb-4">
+                      <div className="font-unbounded text-[#f8f8f8] font-bold text-sm md:text-base mb-2 md:mb-4">
                         {product.price}
                       </div>
                       {product.description && (
@@ -118,30 +122,17 @@ export default function CatalogPage() {
                       </div>
                     </div>
                   </Card>
+                  </Link>
                 )
               })}
             </div>
           )}
 
-          {/* CTA Section */}
-          <div className="mt-12 md:mt-20 text-center">
-            <div className="bg-[#282828] rounded-brand p-8 md:p-12 max-w-2xl mx-auto">
-              <h2 className="text-2xl md:text-4xl font-bold mb-4">
-                Готовы заказать?
-              </h2>
-              <p className="text-foreground/80 mb-6 md:mb-8">
-                Свяжитесь с нами для уточнения деталей и оформления заказа
-              </p>
-              <Link 
-                href="/#contact"
-                className="inline-block bg-accent hover:bg-accent/90 text-background font-semibold px-8 py-3 rounded-brand transition-colors"
-              >
-                Связаться с нами
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
+      
+      <CTASection />
+      <Footer />
     </main>
   )
 }

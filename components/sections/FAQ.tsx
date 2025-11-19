@@ -13,7 +13,7 @@ export const FAQSection: React.FC = () => {
 
   return (
     <Section id="faq" className="bg-[#282828]">
-      <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">Частые вопросы</h2>
+      <h2 className="font-unbounded text-3xl md:text-5xl font-bold mb-12 text-center">Частые вопросы</h2>
       
       <div className="max-w-3xl mx-auto space-y-4">
         {FAQ.map((item, index) => (

@@ -15,6 +15,7 @@ interface Product {
   description: string
   minOrder: number
   leadTime: string
+  slug: string
   images: { url: string; isPrimary: boolean }[]
 }
 
@@ -39,7 +40,7 @@ export const Blanks: React.FC = () => {
   if (loading) {
     return (
       <Section id="blanks" className="bg-[#282828]">
-        <h2 className="text-2xl md:text-5xl font-bold mb-3 md:mb-4 text-center">Готовые бланки</h2>
+        <h2 className="font-unbounded text-2xl md:text-5xl font-bold mb-3 md:mb-4 text-center">Готовые бланки</h2>
         <div className="text-center text-foreground/60">Загрузка...</div>
       </Section>
     )
@@ -64,7 +65,8 @@ export const Blanks: React.FC = () => {
               const primaryImage = product.images.find(img => img.isPrimary)?.url || product.images[0]?.url
               
               return (
-                <Card key={product.id} hover className="overflow-hidden !p-0">
+                <Link key={product.id} href={`/products/${product.slug}`}>
+                  <Card hover className="overflow-hidden !p-0">
                   {primaryImage && (
                     <div className="relative w-full aspect-[3/4] bg-[#404040] overflow-hidden">
                       <Image
@@ -77,8 +79,8 @@ export const Blanks: React.FC = () => {
                   )}
                   
                   <div className="!p-[10px]">
-                    <h3 className="text-sm md:text-xl font-semibold mb-1 md:mb-2">{product.name}</h3>
-                    <div className="text-accent font-bold text-base md:text-lg mb-2 md:mb-3">{product.price}</div>
+                    <h3 className="font-unbounded text-sm md:text-xl font-semibold mb-1 md:mb-2">{product.name}</h3>
+                    <div className="font-unbounded text-[#f8f8f8] font-bold text-sm md:text-base mb-2 md:mb-3">{product.price}</div>
                     <p className="text-foreground/70 text-xs md:text-base mb-3 md:mb-4 leading-snug line-clamp-2">{product.description}</p>
                     <div className="flex gap-1.5 md:gap-2 flex-wrap text-[10px] md:text-xs">
                       <Badge>От {product.minOrder} шт</Badge>
@@ -86,6 +88,7 @@ export const Blanks: React.FC = () => {
                     </div>
                   </div>
                 </Card>
+                </Link>
               )
             })}
           </div>

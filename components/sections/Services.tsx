@@ -5,12 +5,12 @@ import { Card } from '@/components/ui/Card'
 import { SERVICES } from '@/app/content'
 
 const serviceImages = [
-  '/images/services/sewing.jpg',
-  '/images/services/branding.jpg',
-  '/images/services/design.jpg',
-  '/images/services/logistics.jpg',
-  '/images/services/packaging.jpg',
-  '/images/services/quality.jpg',
+  '/images/brandedclothing.webp',
+  '/images/welcomesets.webp',
+  '/images/eventmerch.webp',
+  '/images/giftsforclients.webp',
+  '/images/packagingandprinting.webp',
+  '/images/customizedsolutions.webp',
 ]
 
 export const Services: React.FC = () => {
@@ -22,7 +22,7 @@ export const Services: React.FC = () => {
         {SERVICES.map((service, index) => (
           <Card key={index} hover className="overflow-hidden group !p-0">
             {/* Image */}
-            <div className="relative w-full h-32 md:h-48 bg-[#3a3a3a] overflow-hidden">
+            <div className="relative w-full aspect-square bg-[#3a3a3a] overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center">
                 <svg className="w-12 h-12 md:w-16 md:h-16 text-foreground/20" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />

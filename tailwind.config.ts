@@ -18,6 +18,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-golos)', 'sans-serif'],
+        unbounded: ['var(--font-unbounded)', 'sans-serif'],
       },
     },
   },

@@ -4,17 +4,10 @@ import { Section } from '@/components/ui/Section'
 import { Card } from '@/components/ui/Card'
 import { CASES } from '@/app/content'
 
-const caseImages = [
-  '/images/cases/case-1.png',
-  '/images/cases/case-2.jpeg',
-  '/images/cases/case-3.jpeg',
-  '/images/cases/case-4.jpeg',
-]
-
 export const Cases: React.FC = () => {
   return (
     <Section id="cases">
-      <h2 className="text-3xl md:text-5xl font-bold mb-4 text-center">Кейсы</h2>
+      <h2 className="font-unbounded text-3xl md:text-5xl font-bold mb-4 text-center">Кейсы</h2>
       <p className="text-center text-foreground/80 mb-12 max-w-2xl mx-auto">
         Проекты, которые мы реализовали для бизнеса
       </p>
@@ -25,7 +18,7 @@ export const Cases: React.FC = () => {
             {/* Image */}
             <div className="relative w-full h-56 bg-[#404040] overflow-hidden">
               <Image
-                src={caseImages[index]}
+                src={caseItem.image}
                 alt={caseItem.title}
                 fill
                 className="object-cover"
@@ -33,7 +26,7 @@ export const Cases: React.FC = () => {
             </div>
             
             <div className="p-6">
-              <h3 className="text-xl font-semibold mb-3 text-accent">{caseItem.title}</h3>
+              <h3 className="text-xl font-semibold mb-3 text-[#f8f8f8]">{caseItem.title}</h3>
               <p className="text-foreground/90 mb-3 font-medium">{caseItem.task}</p>
               <p className="text-foreground/70">{caseItem.result}</p>
             </div>

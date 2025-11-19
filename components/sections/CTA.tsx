@@ -82,7 +82,7 @@ export const CTASection: React.FC = () => {
       </div>
 
       <div className="max-w-2xl mx-auto relative z-20">
-        <h2 className="text-3xl md:text-5xl font-bold mb-4 text-center">Обсудим ваш проект</h2>
+        <h2 className="font-unbounded text-3xl md:text-5xl font-bold mb-4 text-center">Обсудим ваш проект</h2>
         <p className="text-center text-foreground/80 mb-8">
           {CTA_FORM.pretext}
         </p>

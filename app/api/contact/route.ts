@@ -16,37 +16,36 @@ export async function POST(request: Request) {
       )
     }
 
-    // Здесь можно добавить отправку email или сохранение в базу данных
-    // Например, через SendGrid, Mailgun, или API Telegram бота
-    
     console.log('Новая заявка:', { name, contact, comment, date: new Date() })
 
-    // Пример отправки в Telegram (нужен bot token и chat id)
-    /*
+    // Отправка в Telegram
     const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
     const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID
     
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
       const message = `
-🆕 Новая заявка с сайта
+🆕 <b>Новая заявка с сайта</b>
 
-👤 Имя: ${name}
-📱 Контакт: ${contact}
-💬 Комментарий: ${comment || 'Не указан'}
-📅 Дата: ${new Date().toLocaleString('ru-RU')}
+👤 <b>Имя:</b> ${name}
+📱 <b>Контакт:</b> ${contact}
+💬 <b>Комментарий:</b> ${comment || 'Не указан'}
+📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}
       `.trim()
 
-      await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message,
-          parse_mode: 'HTML'
+      try {
+        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: 'HTML'
+          })
         })
-      })
+      } catch (telegramError) {
+        console.error('Ошибка отправки в Telegram:', telegramError)
+      }
     }
-    */
 
     return NextResponse.json(
       { success: true, message: 'Заявка получена' },
